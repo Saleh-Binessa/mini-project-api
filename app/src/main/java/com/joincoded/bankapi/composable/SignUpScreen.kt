@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,7 +20,7 @@ import com.joincoded.bankapi.viewmodel.BankViewModel
 @Composable
 fun SignUpScreen(
     onSignInClick: () -> Unit,
-    onSignUpClick: (String, String, String) -> Unit
+onSignUpClick: (String, String, String) -> Unit
 ) {
     Column(
         modifier = Modifier

@@ -16,24 +16,24 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.joincoded.bankapi.composable.BankApp
+import com.joincoded.bankapi.composable.ProfileForm
 import com.joincoded.bankapi.composable.SignUpScreen
 import com.joincoded.bankapi.data.Navigation.Screen
 import com.joincoded.bankapi.ui.theme.BankAPITheme
+import com.joincoded.bankapi.viewmodel.BankViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BankAPITheme (){
-
-
-
             Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    BankApp()
+                   // BankApp()
+                ProfileForm(viewModel = BankViewModel())
                 }
             }
         }

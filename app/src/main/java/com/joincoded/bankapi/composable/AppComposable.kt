@@ -24,7 +24,7 @@ fun BankApp() {
                 onSignInClick = { navController.navigate(Screen.Signin.route) },
                 onSignUpClick = { username, password, image ->
 
-                    navController.navigate(Screen.Signin.route)
+                    navController.navigate(Screen.Signup.route)
                 }
             )
         }
@@ -33,9 +33,16 @@ fun BankApp() {
                 onSignInClick = { username, password ->
 
                 },
-                onSignUpClick = { navController.navigate(Screen.Signup.route) }
+                onSignUpClick = { navController.navigate(Screen.Signin.route) }
             )
         }
+        composable(Screen.Profile.route) {
+            ProfileScreen(
+                onProfileClick = { navController.navigate(Screen.Profile.route)}
+            )
+        }
+
+
     }
 }
 
