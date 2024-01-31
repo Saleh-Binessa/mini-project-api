@@ -40,4 +40,16 @@ class BankViewModel : ViewModel() {
 
         }
     }
+
+    fun withdrawal(amount: Double) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.withdrawal(token = token?.getBearerToken(), AmountChange(amount))
+
+            } catch (e: Exception) {
+                println("Error $e")
+            }
+
+        }
+    }
 }
