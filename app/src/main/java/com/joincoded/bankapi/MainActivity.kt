@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.joincoded.bankapi.composable.WithdrawalCompose
+
+
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,6 +22,7 @@ import com.joincoded.bankapi.composable.BankApp
 import com.joincoded.bankapi.composable.ProfileForm
 import com.joincoded.bankapi.composable.SignUpScreen
 import com.joincoded.bankapi.data.Navigation.Screen
+
 import com.joincoded.bankapi.ui.theme.BankAPITheme
 import com.joincoded.bankapi.viewmodel.BankViewModel
 
@@ -31,7 +35,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
                    // BankApp()
                 ProfileForm(viewModel = BankViewModel())
                 }

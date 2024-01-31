@@ -10,7 +10,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Path
 
 interface BankApiService {
 
@@ -31,22 +30,5 @@ interface BankApiService {
         @Header(Constants.authorization) token: String?,
         @Body amountChange: AmountChange
     ): Response<Unit>
-//
-//    @PUT("${Constants.transferEndpoint}/{userName}")
-//    suspend fun transfer(@Path("UserName") userName: String,
-//                         @Header(Constants.authorization) token: String?,
-//                         @Body amountChange: AmountChange): Response<Unit>
-//
-//
-    @GET(Constants.showProfile)
-    suspend fun showProfile(@Header(Constants.authorization) token: String?): Response<User>
-
-//
-//    @PUT(Constants.updateEndpoints)
-//    suspend fun updateAccount(@Header(Constants.authorization) token: String?,
-//                              @Body user: User):Response<Unit>
-//
-//    @GET(Constants.transactionsEndpoint)
-//    suspend fun getTransactions(@Header(Constants.authorization) token: String?):Response<List<Transaction>>
 
 }
