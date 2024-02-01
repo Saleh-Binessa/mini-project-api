@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -11,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
@@ -24,11 +29,11 @@ import com.joincoded.bankapi.utils.Routes
 import com.joincoded.bankapi.viewmodel.BankViewModel
 
 @Composable
-fun AppFrontPage( bankViewModel: BankViewModel= viewModel(),) {
+fun AppFrontPage(bankViewModel: BankViewModel= viewModel(),) {
     val navController = rememberNavController()
 
     Scaffold(bottomBar = {
-        NavigationBar {
+        NavigationBar( modifier = Modifier, Color.DarkGray) {
             NavigationBarItem(selected = true, onClick = {
                 navController.navigate(Routes.walletRoute)
             }, icon = {
@@ -37,7 +42,7 @@ fun AppFrontPage( bankViewModel: BankViewModel= viewModel(),) {
             NavigationBarItem(selected = true, onClick = {
                 navController.navigate(Routes.profileRoute)
             }, icon = {
-                Text(text = "Profile")
+                Icon(Icons.Filled.AccountBox ,contentDescription = "Profile")
             })
         }
     }) {
@@ -48,7 +53,7 @@ fun AppFrontPage( bankViewModel: BankViewModel= viewModel(),) {
         ) {
 
             composable(Routes.walletRoute) {
-                WalletPage()
+                WalletPage(bankViewModel)
             }
 
             composable(Routes.profileRoute) {
@@ -58,30 +63,7 @@ fun AppFrontPage( bankViewModel: BankViewModel= viewModel(),) {
             }
         }
     }
-    // A NavHost is used for the main content
 
-
-    // Bottom navigation bar for profile and wallet sections
-//    BottomNavigation(
-//        modifier = Modifier.padding(8.dp)
-//    ) {
-//        BottomNavigationItem(
-//            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-//            label = { Text("Profile") },
-//            selected = navController.currentDestination?.route == Screen.Profile.route,
-//            onClick = {
-//                navController.navigate(Screen.Profile.route)
-//            }
-//        )
-//        BottomNavigationItem(
-//            icon = { Icon(Icons.Default.AccountBalanceWallet, contentDescription = "Wallet") },
-//            label = { Text("Wallet") },
-//            selected = navController.currentDestination?.route == Screen.Wallet.route,
-//            onClick = {
-//                navController.navigate(Screen.Wallet.route)
-//            }
-//        )
-//    }
 }
 
 @Composable

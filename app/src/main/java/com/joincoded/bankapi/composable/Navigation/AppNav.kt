@@ -39,7 +39,7 @@ fun AppNav() {
         }
 
         composable(Routes.homeRoute) {
-            AppFrontPage()
+            AppFrontPage(bankViewModel = bankViewModel)
         }
 
 

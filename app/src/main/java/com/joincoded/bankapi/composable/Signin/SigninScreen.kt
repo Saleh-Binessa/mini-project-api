@@ -12,7 +12,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joincoded.bankapi.composable.Signin.SignInForm
 import com.joincoded.bankapi.viewmodel.BankViewModel
 
 
@@ -30,7 +32,7 @@ fun SignInScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(text = "Bank App", style = MaterialTheme.typography.bodyMedium)
+        Text(text = "Bank App", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF9AD14D) )
 
 
         Spacer(modifier = Modifier.height(16.dp))

@@ -55,7 +55,7 @@ fun WithdrawalCompose(bankViewModel: BankViewModel = viewModel(), onWithdrawClic
             Button(
                 onClick = {
 
-                        bankViewModel.withdraw(amount.toDouble(),onWithdrawClick)
+                        bankViewModel.withdraw(amount.toDouble())
 
                 },
                 modifier = Modifier.fillMaxWidth()
