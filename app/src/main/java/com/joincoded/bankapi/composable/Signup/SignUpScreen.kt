@@ -1,4 +1,4 @@
-package com.joincoded.bankapi.composable
+package com.joincoded.bankapi.composable.Signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,33 +12,36 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joincoded.bankapi.composable.Signup.SignUpForm
 import com.joincoded.bankapi.viewmodel.BankViewModel
 
 
 @Composable
-fun SignInScreen(
-onSignInClick: (String, String) -> Unit,
-    onSignUpClick: () -> Unit
+fun SignUpScreen(
+    bankViewModel: BankViewModel, onSignInClick: () -> Unit
+
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
+
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Text(text = "Bank App", style = MaterialTheme.typography.bodyMedium)
+        Text(text = "Bank App", style = MaterialTheme.typography.headlineMedium,color =  Color(0xFF9AD14D))
 
 
         Spacer(modifier = Modifier.height(16.dp))
-        SignInForm(viewModel = BankViewModel())
-
+        // double check
+       SignUpForm(BankViewModel(),onSignInClick)
 
         Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = onSignUpClick) {
-            Text(text = "Don't have an account? Sign Up")
+        TextButton(onClick = onSignInClick) {
+            Text(text = "Already have an account? Sign In")
         }
     }
 }

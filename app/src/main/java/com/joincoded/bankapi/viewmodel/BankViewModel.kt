@@ -15,25 +15,33 @@ import kotlinx.coroutines.launch
 class BankViewModel : ViewModel() {
     private val apiService = RetrofitHelper.getInstance().create(BankApiService::class.java)
     var token: TokenResponse? by mutableStateOf(null)
+    var user: User? by mutableStateOf(null)
+   // var transactions: List<Transaction>? by mutableStateOf(null)
 
-
-    fun signup(username: String, password: String, image: String = "") {
+    fun signup(username: String, password: String, image: String = "",navigation: () -> Unit) {
         viewModelScope.launch {
             try {
                 val response = apiService.signup(User(username, password, null, "", null))
                 token = response.body()
             } catch (e: Exception) {
                 println("Error $e")
+            } finally {
+                if (token!=null)
+                {
+                    showProfile()
+                   // Transactions()
+                    navigation()
+                }
             }
 
         }
     }
-    fun signin(username: String,password: String, nav: () -> Unit){
-
+    fun signin(username: String,password: String){
         viewModelScope.launch {
             try {
                 val response = apiService.signin(User(username, password, null, "", null))
                 token = response.body()
+                println("TOKEN SIGNIN ${token?.token}")
             } catch (e: Exception) {
                 println("Error $e")
             }
@@ -45,7 +53,7 @@ class BankViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = apiService.showProfile(token = token?.getBearerToken())
-            //    User = response.body()
+                user = response.body()
             } catch (e: Exception) {
                 println("Error $e")
             }
@@ -53,7 +61,7 @@ class BankViewModel : ViewModel() {
 
     }
 
-    fun deposit(amount: Double, nav: () -> Unit) {
+    fun deposit(amount: Double, navigation: () -> Unit) {
         viewModelScope.launch {
             try {
                 val response = apiService.deposit(
@@ -67,11 +75,15 @@ class BankViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 println("Error $e")
+            } finally {
+                showProfile()
+              //  Transactions()
+                navigation()
             }
 
         }
     }
-    fun withdraw(amount: Double, nav: () -> Unit) {
+    fun withdraw(amount: Double, navigation: () -> Unit) {
         viewModelScope.launch {
             try {
                 val response = apiService.withdraw(
@@ -87,21 +99,60 @@ class BankViewModel : ViewModel() {
                 println("Error $e")
             } finally {
                 showProfile()
-                nav()
+                navigation()
             }
 
         }
     }
-
-    fun withdrawal(amount: Double) {
+    fun transfer(username: String, amount: Double, navigation: () -> Unit) {
         viewModelScope.launch {
             try {
-                val response = apiService.withdrawal(token = token?.getBearerToken(), AmountChange(amount))
+                val response = apiService.transfer(
+                    userName = username,
+                    token = token?.getBearerToken(),
+                    amountChange = AmountChange(amount)
+                )
+                if (response.isSuccessful) {
 
+                    println("Successful transfer")
+                } else {
+
+                    println("Failed transfer")
+                }
             } catch (e: Exception) {
                 println("Error $e")
+            } finally {
+                showProfile()
+              //  Transactions()
+                navigation()
             }
+        }
+    }
+    fun updateProfile(username: String,password: String, navigation: () -> Unit){
+        viewModelScope.launch {
+            try {
+                val response = apiService.updateProfile(token = token?.getBearerToken(),
+                    user = User(username, password, null, "", null,))
+            } catch (e: Exception){
+                println("Error $e")
+            } finally {
+                showProfile()
+             //   Transactions()
+                navigation()
+            }
+
 
         }
     }
+//    fun Transactions(){
+//        viewModelScope.launch {
+//            try {
+//                val response = apiService.Transactions(token = token?.getBearerToken())
+//                transactions = response.body()
+//            } catch (e:Exception){
+//                println("Error $e")
+//            }
+//
+//        }
+//    }
 }

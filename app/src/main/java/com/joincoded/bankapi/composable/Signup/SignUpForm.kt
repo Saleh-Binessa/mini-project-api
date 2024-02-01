@@ -1,4 +1,4 @@
-package com.joincoded.bankapi.composable
+package com.joincoded.bankapi.composable.Signup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,38 +18,40 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.joincoded.bankapi.data.Navigation.Screen
-import com.joincoded.bankapi.data.User
 import com.joincoded.bankapi.viewmodel.BankViewModel
 
+
 @Composable
-fun ProfileForm(viewModel: BankViewModel) {
+fun SignUpForm( bankViewModel: BankViewModel ,onSigninClick:() -> Unit
+
+
+) {
     var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var image by remember { mutableStateOf("") }
-    var balance by remember { mutableStateOf("") }
 
     Column {
-            Text(text = "Profile")
         OutlinedTextField(
             value = username,
-            onValueChange = { username = it},
+            onValueChange = { username = it },
+            label = { Text("Username") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
         )
         OutlinedTextField(
             value = image,
-            onValueChange = { image = Screen.Signup.route },
-            label = { Text("image") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-
-        OutlinedTextField(
-            value = balance,
-            onValueChange = { balance = it },
-            label = { Text("balance") },
+            onValueChange = { image = it },
+            label = { Text("Image URL") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
@@ -57,5 +59,11 @@ fun ProfileForm(viewModel: BankViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        Button(
+            onClick = { bankViewModel.signup(username, password, image,onSigninClick) },
+            modifier = Modifier.fillMaxWidth(),colors = ButtonDefaults.buttonColors(ListItemDefaults.contentColor)
+        ) {
+            Text(text = "Sign Up")
+        }
     }
 }

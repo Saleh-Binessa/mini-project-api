@@ -1,4 +1,4 @@
-package com.joincoded.bankapi.composable
+package com.joincoded.bankapi.composable.Signin
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.ListItemDefaults.contentColor
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +22,9 @@ import com.joincoded.bankapi.viewmodel.BankViewModel
 
 
 @Composable
-fun SignUpForm(viewModel: BankViewModel) {
+fun SignInForm(bankViewModel: BankViewModel, onSigninClick: () -> Unit) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var image by remember { mutableStateOf("") }
 
     Column {
         OutlinedTextField(
@@ -45,22 +44,20 @@ fun SignUpForm(viewModel: BankViewModel) {
                 .fillMaxWidth()
                 .padding(8.dp)
         )
-        OutlinedTextField(
-            value = image,
-            onValueChange = { image = it },
-            label = { Text("Image URL") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        if (bankViewModel.token?.token != null)
+            onSigninClick()
+
         Button(
-            onClick = { viewModel.signup(username, password, image) },
-            modifier = Modifier.fillMaxWidth(),colors = ButtonDefaults.buttonColors(ListItemDefaults.contentColor)
+            onClick = {
+                bankViewModel.signin(username, password)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(contentColor)
         ) {
-            Text(text = "Sign Up")
+            Text(text = "Sign In")
         }
     }
 }
