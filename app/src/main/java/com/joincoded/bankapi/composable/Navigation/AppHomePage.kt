@@ -17,7 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-import com.joincoded.bankapi.composable.ProfileScreen
+import com.joincoded.bankapi.composable.profile.ProfileForm
 
 import com.joincoded.bankapi.composable.Wallet.WalletPage
 import com.joincoded.bankapi.utils.Routes
@@ -52,49 +52,9 @@ fun AppFrontPage( bankViewModel: BankViewModel= viewModel(),) {
             }
 
             composable(Routes.profileRoute) {
-                ProfileScreen(
-                    viewModel()
-                )
+                ProfileForm(bankViewModel)
             }
         }
-    }
-    // A NavHost is used for the main content
-
-
-    // Bottom navigation bar for profile and wallet sections
-//    BottomNavigation(
-//        modifier = Modifier.padding(8.dp)
-//    ) {
-//        BottomNavigationItem(
-//            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-//            label = { Text("Profile") },
-//            selected = navController.currentDestination?.route == Screen.Profile.route,
-//            onClick = {
-//                navController.navigate(Screen.Profile.route)
-//            }
-//        )
-//        BottomNavigationItem(
-//            icon = { Icon(Icons.Default.AccountBalanceWallet, contentDescription = "Wallet") },
-//            label = { Text("Wallet") },
-//            selected = navController.currentDestination?.route == Screen.Wallet.route,
-//            onClick = {
-//                navController.navigate(Screen.Wallet.route)
-//            }
-//        )
-//    }
-}
-
-@Composable
-fun ProfilePage() {
-    // Implement the UI for the Profile page here
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Profile Page")
     }
 }
 
