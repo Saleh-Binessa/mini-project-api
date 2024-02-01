@@ -9,6 +9,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ListItemDefaults.contentColor
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.joincoded.bankapi.viewmodel.BankViewModel
@@ -28,6 +30,7 @@ fun SignInForm(bankViewModel: BankViewModel, onSigninClick: () -> Unit) {
 
     Column {
         OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(Color.White),
             value = username,
             onValueChange = { username = it },
             label = { Text("Username") },
@@ -36,6 +39,7 @@ fun SignInForm(bankViewModel: BankViewModel, onSigninClick: () -> Unit) {
                 .padding(8.dp)
         )
         OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(Color.White),
             value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
