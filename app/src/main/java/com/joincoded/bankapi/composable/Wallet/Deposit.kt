@@ -57,7 +57,7 @@ fun DepositCompose(bankViewModel:BankViewModel= viewModel(),
             Button(
                 onClick = {
 
-                    bankViewModel.deposit(amount.toDouble(),deposit)
+                    bankViewModel.deposit(amount.toDouble())
 
                 },
                 modifier = Modifier.fillMaxWidth()
