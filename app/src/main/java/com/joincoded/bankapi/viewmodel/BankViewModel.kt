@@ -19,16 +19,15 @@ class BankViewModel : ViewModel() {
     var user: User? by mutableStateOf(null)
     var transactions: List<TransactionDetails>? by mutableStateOf(null)
 
-    fun signup(username: String, password: String, image: String = "",navigation: () -> Unit) {
+    fun signup(username: String, password: String, image: String = "", navigation: () -> Unit) {
         viewModelScope.launch {
             try {
-                val response = apiService.signup(User(username, password, null, "", null))
+                val response = apiService.signup(User(username, password, 0.0, "", null))
                 token = response.body()
             } catch (e: Exception) {
                 println("Error $e")
             } finally {
-                if (token!=null)
-                {
+                if (token != null) {
                     showProfile()
                    // Transactions()
                     navigation()
@@ -45,7 +44,7 @@ class BankViewModel : ViewModel() {
                 println("TOKEN SIGNIN ${token?.token}")
                 transactions()
                 showProfile()
-                
+
 
 
             } catch (e: Exception) {
@@ -99,6 +98,9 @@ class BankViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 println("Error $e")
+            } finally {
+                showProfile()
+
             }
 
         }
@@ -120,6 +122,10 @@ class BankViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 println("Error $e")
+            } finally {
+                showProfile()
+
+
             }
         }
     }

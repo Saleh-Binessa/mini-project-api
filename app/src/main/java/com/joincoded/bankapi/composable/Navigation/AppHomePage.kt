@@ -22,7 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-import com.joincoded.bankapi.composable.ProfileScreen
+import com.joincoded.bankapi.composable.profile.ProfileForm
 
 import com.joincoded.bankapi.composable.Wallet.WalletPage
 import com.joincoded.bankapi.utils.Routes
@@ -57,9 +57,7 @@ fun AppFrontPage(bankViewModel: BankViewModel= viewModel(),) {
             }
 
             composable(Routes.profileRoute) {
-                ProfileScreen(
-                    viewModel()
-                )
+                ProfileForm(bankViewModel)
             }
         }
     }

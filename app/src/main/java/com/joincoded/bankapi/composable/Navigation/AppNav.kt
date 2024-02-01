@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.joincoded.bankapi.composable.Signin.SignInScreen
 import com.joincoded.bankapi.composable.Signup.SignUpScreen
+import com.joincoded.bankapi.composable.profile.ProfileScreen
 
 import com.joincoded.bankapi.utils.Routes
 import com.joincoded.bankapi.viewmodel.BankViewModel
@@ -37,7 +38,11 @@ fun AppNav() {
                 }
             )
         }
-
+        composable(Routes.profileRoute) {
+            ProfileScreen(
+                bankViewModel=bankViewModel, toDetails = {navController.navigate(Routes.profileRoute)
+        })
+        }
         composable(Routes.homeRoute) {
             AppFrontPage(bankViewModel = bankViewModel)
         }
